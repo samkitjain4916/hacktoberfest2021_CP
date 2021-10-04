@@ -1,0 +1,79 @@
+//Author -> Samkit Jain
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+#define ll long long int
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+ 
+    ll t;
+    cin>>t;
+    for(ll test=1;test<=t;test++)
+    {
+        ll n;
+        cin>>n;
+        ll x[n],x1[n];
+        for(ll i=0;i<n;i++)
+        {
+            cin>>x[i];
+            x1[i]=x[i];
+        }
+
+        sort(x1,x1+n);
+        vector<vector<ll>>ans;
+
+        for(ll i=0;i<n;i++)
+        {
+            if(x[i]!=x1[i])
+            {
+                ll l,r,d;
+                for(ll j=i+1;j<n;j++)
+                {
+                    if(x[j]==x1[i])
+                    {
+                        d=j;
+
+                        vector<ll>v={i+1,n,d-i};
+                        ans.push_back(v);
+
+                        vector<ll>store;
+                        for(ll k=i;k<=d-1;k++)
+                        {
+                            store.push_back(x[k]);
+                        }
+
+                        ll index=i;
+                        for(ll k=d;k<n;k++)
+                        {
+                            x[index] = x[k];
+                            index++;
+                        }
+                        for(ll k=0;k<store.size();k++)
+                        {
+                            x[index] = store[k];
+                            index++;
+                        }
+
+
+                        break;
+                    }
+
+                }
+
+            }
+        }
+
+        cout<<ans.size()<<"\n";
+        for(ll i=0;i<ans.size();i++)
+        {
+            cout<<ans[i][0]<<" "<<ans[i][1]<<" "<<ans[i][2]<<"\n";
+        }
+
+
+
+    }
+    return 0;
+}
